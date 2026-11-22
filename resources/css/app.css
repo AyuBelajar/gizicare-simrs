@@ -7,3 +7,64 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+
+/**
+    The lines above are intact.
+    The lines below were added by maryUI installer.
+*/
+
+/** daisyUI */
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "gizicare";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #FFFFFF;      /* kartu */
+  --color-base-200: #FFF6E3;      /* latar halaman & sidebar */
+  --color-base-300: #F0DFCC;      /* garis tepi */
+  --color-base-content: #33262F;  /* teks utama */
+
+  --color-primary: #FFCED8;       /* tombol utama, menu aktif */
+  --color-primary-content: #4A2233;
+  --color-secondary: #CDC1FF;
+  --color-secondary-content: #3C2C85;
+  --color-accent: #BFECFF;
+  --color-accent-content: #1D5470;
+  --color-warning: #FFE8C4;
+  --color-warning-content: #7A4A08;
+  --color-error: #D2557A;
+  --color-error-content: #FFFFFF;
+  --color-neutral: #5B3550;
+  --color-neutral-content: #FFFFFF;
+
+  --radius-field: 0.75rem;   /* input & tombol: 12px seperti mockup */
+  --radius-box: 1.25rem;     /* kartu: 20px */
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+
+/* maryUI */
+@source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
+
+/* Theme toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+* Paginator - Traditional style
+* Because Laravel defaults does not match well the design of daisyUI.
+*/
+
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply bg-primary text-base-100
+}
+
+.mary-table-pagination button {
+    @apply cursor-pointer
+}

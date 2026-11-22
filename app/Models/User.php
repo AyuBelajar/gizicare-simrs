@@ -2,31 +2,50 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $primaryKey = 'id_user';
+
+    protected $fillable = ['name', 'email', 'password_hash', 'role', 'is_active', 'last_login'];
+
+    protected $hidden = ['password_hash'];
+
+    public const ROLE_LABEL = [
+        'ahli_gizi'        => 'Ahli Gizi',
+        'petugas_dapur'    => 'Petugas Dapur',
+        'admin'            => 'Admin',
+        'kepala_instalasi' => 'Kepala Instalasi',
+    ];
+
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password_hash' => 'hashed',   // otomatis di-hash saat disimpan
+            'is_active'     => 'boolean',
+            'last_login'    => 'datetime',
         ];
+    }
+
+    // Beri tahu Laravel bahwa kolom password bernama password_hash
+    public function getAuthPasswordName(): string
+    {
+        return 'password_hash';
+    }
+
+    public function hasRole(string ...$roles): bool
+    {
+        return in_array($this->role, $roles, true);
+    }
+
+    public function getRoleLabelAttribute(): string
+    {
+        return self::ROLE_LABEL[$this->role] ?? $this->role;
     }
 }
