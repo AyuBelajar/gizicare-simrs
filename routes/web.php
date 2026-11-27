@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     // Produksi dapur — Orang 5 (Dapur mengubah, Ahli Gizi & Kepala melihat)
     Route::middleware('role:petugas_dapur,ahli_gizi,kepala_instalasi')->group(function () {
         Route::view('/dapur/rekap', 'placeholder', ['judul' => 'B1 Rekap Porsi', 'pemilik' => 'Orang 5'])->name('dapur.rekap');
-        Route::view('/dapur/sisa', 'placeholder', ['judul' => 'B1 Input Sisa Makanan', 'pemilik' => 'Orang 5'])->name('dapur.sisa');
+        Route::get('/dapur/sisa', \App\Livewire\Dapur\InputSisaMakanan::class)->name('dapur.sisa');
         Route::view('/dapur/etiket', 'placeholder', ['judul' => 'B2 Cetak Etiket', 'pemilik' => 'Orang 5'])->name('dapur.etiket');
     });
 
