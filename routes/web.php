@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Login;
 use App\Livewire\MasterData;
+use App\Livewire\DaftarPasien;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,8 +40,8 @@ Route::middleware('auth')->group(function () {
 
     // Data pasien — Orang 2 (Ahli Gizi, Dapur, Kepala boleh membuka)
     Route::middleware('role:ahli_gizi,petugas_dapur,kepala_instalasi')->group(function () {
-       Route::view('/pasien', 'placeholder', ['judul' => 'A3 Daftar Pasien', 'pemilik' => 'Orang 2'])->name('pasien.index');
-       Route::view('/pasien/{rawat}', 'placeholder', ['judul' => 'A6 Detail Pasien', 'pemilik' => 'Orang 2'])->name('pasien.show');
+       Route::get('/pasien', DaftarPasien::class)->name('pasien.index');
+       Route::view('/pasien/{idRawat}', 'placeholder', ['judul' => 'A6 Detail Pasien', 'pemilik' => 'Orang 2'])->name('pasien.show');
     });
 
     // Dashboard Ahli Gizi — Orang 1
