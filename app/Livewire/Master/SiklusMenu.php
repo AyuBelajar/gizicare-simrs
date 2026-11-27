@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Dapur;
+namespace App\Livewire\Master;     // sesudah
 
 use App\Models\JenisDiet;
 use App\Models\SiklusMenu as Menu;
@@ -116,7 +116,7 @@ class SiklusMenu extends Component
             ->orderBy('hari_ke')->orderBy('id_waktu')->orderBy('id_diet')
             ->paginate(15);
 
-        return view('livewire.dapur.siklus-menu', [
+        return view('livewire.master.siklus-menu', [
             'menu'      => $menu,
             'headers'   => [
                 ['key' => 'hari_ke',               'label' => 'Hari ke-', 'class' => 'w-20'],
