@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     // Admin — Orang 1, 2, 5
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/master-data', MasterData::class)->name('admin.master');
-        Route::view('/admin/akun', 'placeholder', ['judul' => 'C2 Kelola Akun & Role', 'pemilik' => 'Orang 1'])->name('admin.akun');
+        Route::get('/admin/akun', \App\Livewire\Admin\KelolaAkun::class)->name('admin.akun');
         Route::view('/admin/audit-log', 'placeholder', ['judul' => 'C3 Audit Log', 'pemilik' => 'Orang 1'])->name('admin.audit');
     });
 
