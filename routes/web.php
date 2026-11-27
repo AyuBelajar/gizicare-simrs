@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/master-data', MasterData::class)->name('admin.master');
         Route::view('/admin/akun', 'placeholder', ['judul' => 'C2 Kelola Akun & Role', 'pemilik' => 'Orang 1'])->name('admin.akun');
         Route::view('/admin/audit-log', 'placeholder', ['judul' => 'C3 Audit Log', 'pemilik' => 'Orang 1'])->name('admin.audit');
+        Route::get('/admin/siklus-menu', \App\Livewire\Dapur\SiklusMenu::class)->name('admin.siklus-menu');   // ← baris baru (Orang 5)
     });
 
     // Kepala Instalasi — Orang 4
